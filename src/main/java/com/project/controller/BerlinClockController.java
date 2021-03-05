@@ -22,12 +22,12 @@ public class BerlinClockController {
 	// ChronoUnit.HOURS).atZone(ZoneOffset.UTC).toLocalTime();
 
 	private BerlinClock berlinClock = new BerlinClock();
-	private SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm:ss");
+
 
 	@GetMapping(value = "")
 	public String getBerlinClock() {
 		log.info("getBerlinClock() called");
-		berlinClock.Process(dateFormatter.format(new Date()));
+		berlinClock.Process(new Date());
 		return berlinClock.getClok();
 
 	}

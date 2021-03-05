@@ -63,13 +63,22 @@ class BerlinClockApplicationTests {
 		log.debug("withLocalTime() : \n"+berlinClock.getClok());
 	}
 	@Test 
-	void callApi() {
+	void callApiWithParam() {
 		LocalTime now = LocalTime.now();
 		BerlinClockController controller = new BerlinClockController();
 		String val = controller.getBerlinClock(now);
 		
-		System.out.println("callApi() : \n"+val);
-		log.debug("callApi() : \n"+val);
+		System.out.println("callApiWithParam() : \n"+val);
+		log.debug("callApiWithParam() : \n"+val);
+
+	}
+	@Test 
+	void callApiNoParam() {
+		
+		BerlinClockController controller = new BerlinClockController();
+		String val = controller.getBerlinClock(new Date());
+		System.out.println("callApiNoParam() : \n"+val);
+		log.debug("callApiNoParam() : \n"+val);
 
 	}
 
