@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.project.BerlinClockBuilder.BerlinClock;
+import com.project.controller.BerlinClockController;
 
 @SpringBootTest
 class BerlinClockApplicationTests {
@@ -38,28 +39,38 @@ class BerlinClockApplicationTests {
 	}
 	
 	@Test 
-	void Stringvalues() {
+	void invalidStringValues() {
 		BerlinClock berlinClock = new BerlinClock();
 		berlinClock.Process("hh:mm:ss");
-		System.out.println("Stringvalues() : "+berlinClock.getClok());
-		log.debug("Stringvalues() : "+berlinClock.getClok());
+		System.out.println("invalidStringValues() : \n"+berlinClock.getClok());
+		log.debug("invalidStringValues() : \n"+berlinClock.getClok());
 	}
 	
 	@Test 
 	void withDateTime() {
 		BerlinClock berlinClock = new BerlinClock();
 		berlinClock.Process(new Date());
-		System.out.println("withDateTime() : "+berlinClock.getClok());
-		log.debug("withDateTime() : "+berlinClock.getClok());
+		System.out.println("withDateTime() : \n"+berlinClock.getClok());
+		log.debug("withDateTime() : \n"+berlinClock.getClok());
 	}
 	
 	@Test 
 	void withLocalTime() {
 		BerlinClock berlinClock = new BerlinClock();
+		LocalTime later = LocalTime.now().plusHours(5);
+		berlinClock.Process(later);
+		System.out.println("withLocalTime() : \n"+berlinClock.getClok());
+		log.debug("withLocalTime() : \n"+berlinClock.getClok());
+	}
+	@Test 
+	void callApi() {
 		LocalTime now = LocalTime.now();
-		berlinClock.Process(now);
-		System.out.println("withLocalTime() : "+berlinClock.getClok());
-		log.debug("withLocalTime() : "+berlinClock.getClok());
+		BerlinClockController controller = new BerlinClockController();
+		String val = controller.getBerlinClock(now);
+		
+		System.out.println("callApi() : \n"+val);
+		log.debug("callApi() : \n"+val);
+
 	}
 
 }
